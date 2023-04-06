@@ -42,7 +42,7 @@ local function write_virtual_text(bufnr, ns, line, chunks, mode)
 end
 
 M.read_config = function()
-  local file = io.open(os.getenv("HOME") .. "/" .. ".chatgpt-" .. M.type .. "-params.json", "rb")
+  local file = io.open(vim.fn.expand("~") .. "/" .. ".chatgpt-" .. M.type .. "-params.json", "rb")
   if not file then
     return nil
   end
@@ -77,7 +77,7 @@ M.get_settings_panel = function(type, default_params)
     if M.params[key] ~= nil then
       local vt = {
         { "  " .. key .. ": ", "ErrorMsg" },
-        { M.params[key] .. "", "Identifier" },
+        { M.params[key] .. "",    "Identifier" },
       }
       table.insert(details, vt)
     end
@@ -111,7 +111,7 @@ M.get_settings_panel = function(type, default_params)
       M.params[key] = params_validators[key](new_value)
       local vt = {
         { "  " .. key .. ": ", "ErrorMsg" },
-        { M.params[key] .. "", "Identifier" },
+        { M.params[key] .. "",    "Identifier" },
       }
       vim.api.nvim_buf_del_extmark(M.panel.bufnr, namespace_id, M.vts[row - 1])
       M.vts[row - 1] = vim.api.nvim_buf_set_extmark(

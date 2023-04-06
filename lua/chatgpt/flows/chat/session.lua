@@ -6,7 +6,7 @@ local scan = require("plenary.scandir")
 local Session = classes.class()
 
 local function get_current_date()
-  return os.date("%Y-%m-%d_%H:%M:%S")
+  return os.date("%Y-%m-%d_%H-%M-%S")
 end
 
 local function get_default_filename()
@@ -14,7 +14,7 @@ local function get_default_filename()
 end
 
 local function parse_date_time(str)
-  local year, month, day, hour, min, sec = string.match(str, "(%d+)-(%d+)-(%d+)_(%d+):(%d+):(%d+)")
+  local year, month, day, hour, min, sec = string.match(str, "(%d+)-(%d+)-(%d+)_(%d+)-(%d+)-(%d+)")
   return os.time({ year = year, month = month, day = day, hour = hour, min = min, sec = sec })
 end
 
